@@ -26,5 +26,11 @@ module.exports = {
         ignorePseudoElements: ['v-deep']
       }
     ]
-  }
+  },
+
+  root: true,
+
+  'extends': [
+    'stylelint-config-standard'
+  ]
 };
