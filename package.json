@@ -9,7 +9,7 @@
     "lint:style": "vue-cli-service lint:style"
   },
   "dependencies": {
-    "magpie-base": "3.1"
+    "magpie-base": "3.4"
   },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "~2.1.0",
@@ -22,6 +22,10 @@
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  "engines": {
+    "node": "14.x || 16.x",
+    "npm": ">=7.0.0"
   },
   "browserslist": [
     "> 1%",
