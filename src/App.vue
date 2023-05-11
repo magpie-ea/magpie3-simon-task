@@ -15,8 +15,8 @@
         right part of your screen.
       </p>
       <p>
-        Whenever you see a circle, please press the 'q' key on your keyboard,
-        whenever you see a square, please press the 'p' key - regardless of the
+        Whenever you see a circle, please press the 'p' key on your keyboard,
+        whenever you see a square, please press the 'q' key - regardless of the
         position of the shape.
       </p>
       <p>
