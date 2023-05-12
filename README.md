@@ -10,5 +10,5 @@ To build the project for deployment (e.g. to Netlify), run `npm run build.
 
 For more information, see [magpie site](https://magpie-experiments.org).
 
-Live version [here](https://magpie-ea.github.io/magpie3-simon-task/)
+Live version [here](https://magpie-ea.github.io/magpie3-simon-task/).
 
