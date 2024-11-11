@@ -29,7 +29,11 @@
       </p>
     </InstructionScreen>
 
-    <template v-for="(trial, i) in trials">
+    <InstructionScreen>
+      <p> Let's start with the <strong>training phase</strong> with 10 trials of training!</p>
+    </InstructionScreen>
+
+    <template v-for="(trial, i) in trialsTrain">
       <KeypressScreen
         :key="i"
         :keys="{ q: 'square', p: 'circle' }"
@@ -63,6 +67,45 @@
       </KeypressScreen>
     </template>
 
+    <InstructionScreen>
+      <p> Good job on training. Next, start with the <strong>test phase</strong> with 20 trials whenever you are ready!</p>
+    </InstructionScreen>
+
+    <template v-for="(trial, i) in trialsTest">
+      <KeypressScreen
+        :key="i"
+        :keys="{ q: 'square', p: 'circle' }"
+        :fixation-time="Math.floor(Math.random() * 1500 + 1200)"
+      >
+        <template #stimulus>
+          <CanvasStage :config="{ width: 800, height: 400 }">
+            <CanvasLayer>
+              <CanvasCircle
+                v-if="trial.target_object === 'circle'"
+                :config="{
+                  fill: 'lightblue',
+                  radius: 50,
+                  x: trial.target_position === 'left' ? 50 : 700,
+                  y: 200
+                }"
+              />
+              <CanvasRect
+                v-if="trial.target_object === 'square'"
+                :config="{
+                  fill: 'lightblue',
+                  width: 100,
+                  height: 100,
+                  x: trial.target_position === 'left' ? 50 : 700,
+                  y: 150
+                }"
+              />
+            </CanvasLayer>
+          </CanvasStage>
+        </template>
+      </KeypressScreen>
+    </template>
+
+
     <PostTestScreen />
 
     <DebugResultsScreen />
@@ -75,9 +118,11 @@ export default {
   name: 'App',
 
   data() {
-    const trials = _.map(_.range(20), () => _.sample(conditions));
+    const trialsTrain = _.map(_.range(10), () => _.sample(conditions));
+    const trialsTest  = _.map(_.range(20), () => _.sample(conditions));
     return {
-      trials
+      trialsTrain,
+      trialsTest
     };
   }
 };
