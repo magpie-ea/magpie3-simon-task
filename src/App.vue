@@ -39,6 +39,14 @@
         :keys="{ q: 'square', p: 'circle' }"
         :fixation-time="Math.floor(Math.random() * 1500 + 1200)"
       >
+
+        <Record :data="{
+              trial: i,
+              target_object: trial.target_object,
+              target_position: trial.target_position,
+              phase: 'test'
+            }" />
+
         <template #stimulus>
           <CanvasStage :config="{ width: 800, height: 400 }">
             <CanvasLayer>
@@ -77,6 +85,13 @@
         :keys="{ q: 'square', p: 'circle' }"
         :fixation-time="Math.floor(Math.random() * 1500 + 1200)"
       >
+
+        <Record :data="{
+              trial: i,
+              target_object: trial.target_object,
+              target_position: trial.target_position,
+              phase: 'training'
+            }" />
         <template #stimulus>
           <CanvasStage :config="{ width: 800, height: 400 }">
             <CanvasLayer>
@@ -118,8 +133,8 @@ export default {
   name: 'App',
 
   data() {
-    const trialsTrain = _.map(_.range(10), () => _.sample(conditions));
-    const trialsTest  = _.map(_.range(20), () => _.sample(conditions));
+    const trialsTrain = _.map(_.range(1), () => _.sample(conditions));
+    const trialsTest  = _.map(_.range(2), () => _.sample(conditions));
     return {
       trialsTrain,
       trialsTest
