@@ -15,8 +15,8 @@
         right part of your screen.
       </p>
       <p>
-        Whenever you see a circle, please press the 'p' key on your keyboard,
-        whenever you see a square, please press the 'q' key - regardless of the
+        Whenever you see a <strong>{{keyQisForShape == "circle" ? 'circle' : 'square'}},  press 'q'</strong> on your keyboard,
+        whenever you see a <strong>{{keyQisForShape == "circle" ? 'square' : 'circle'}},  press 'p'</strong> - regardless of the
         position of the shape.
       </p>
       <p>
@@ -36,16 +36,9 @@
     <template v-for="(trial, i) in trialsTrain">
       <KeypressScreen
         :key="i"
-        :keys="{ q: 'square', p: 'circle' }"
+        :keys="{ q: keyQisForShape, p: keyQisForShape == 'circle' ? 'square' : 'circle' }"
         :fixation-time="Math.floor(Math.random() * 1500 + 1200)"
       >
-
-        <Record :data="{
-              trial: i,
-              target_object: trial.target_object,
-              target_position: trial.target_position,
-              phase: 'test'
-            }" />
 
         <template #stimulus>
           <CanvasStage :config="{ width: 800, height: 400 }">
@@ -71,6 +64,13 @@
               />
             </CanvasLayer>
           </CanvasStage>
+          <Record :data="{
+              trial: i,
+              keyQisForShape: keyQisForShape,
+              target_object: trial.target_object,
+              target_position: trial.target_position,
+              phase: 'test'
+            }" />
         </template>
       </KeypressScreen>
     </template>
@@ -82,16 +82,10 @@
     <template v-for="(trial, i) in trialsTest">
       <KeypressScreen
         :key="i"
-        :keys="{ q: 'square', p: 'circle' }"
+        :keys="{ q: keyQisForShape, p: keyQisForShape == 'circle' ? 'square' : 'circle' }"
         :fixation-time="Math.floor(Math.random() * 1500 + 1200)"
       >
 
-        <Record :data="{
-              trial: i,
-              target_object: trial.target_object,
-              target_position: trial.target_position,
-              phase: 'training'
-            }" />
         <template #stimulus>
           <CanvasStage :config="{ width: 800, height: 400 }">
             <CanvasLayer>
@@ -116,6 +110,13 @@
               />
             </CanvasLayer>
           </CanvasStage>
+        <Record :data="{
+              trial: i,
+              keyQisForShape: keyQisForShape,
+              target_object: trial.target_object,
+              target_position: trial.target_position,
+              phase: 'training'
+            }" />
         </template>
       </KeypressScreen>
     </template>
@@ -123,21 +124,26 @@
 
     <PostTestScreen />
 
-    <DebugResultsScreen />
+    <SubmitResultsScreen />
+
   </Experiment>
 </template>
 
 <script>
 import _ from 'lodash';
+
+var keyQisForShape = _.sample(["square", "circle"])
+
 export default {
   name: 'App',
 
   data() {
-    const trialsTrain = _.map(_.range(1), () => _.sample(conditions));
-    const trialsTest  = _.map(_.range(2), () => _.sample(conditions));
+    const trialsTrain = _.map(_.range(10), () => _.sample(conditions));
+    const trialsTest  = _.map(_.range(20), () => _.sample(conditions));
     return {
       trialsTrain,
-      trialsTest
+      trialsTest,
+      keyQisForShape
     };
   }
 };
