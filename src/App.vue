@@ -69,7 +69,7 @@
               keyQisForShape: keyQisForShape,
               target_object: trial.target_object,
               target_position: trial.target_position,
-              phase: 'test'
+              phase: 'training'
             }" />
         </template>
       </KeypressScreen>
@@ -115,7 +115,7 @@
               keyQisForShape: keyQisForShape,
               target_object: trial.target_object,
               target_position: trial.target_position,
-              phase: 'training'
+              phase: 'test'
             }" />
         </template>
       </KeypressScreen>
